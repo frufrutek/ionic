@@ -1,0 +1,8 @@
+{
+  "name": "UMDK",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "189eb166"
+}

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-back-button text="Brskanje" icon="" defaultHref="/brskanje"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:white;">
+      ISKANJE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="odstrani" *ngIf="odstrani"></div>
+  <form (ngSubmit)="ngOnInit()" style="text-align:center;" *ngIf="odstrani1">
+    <ion-item>
+      <ion-input style="width:100%; border:1px solid black; border-radius:5px;" placeholder="Vnesite iskalni niz" type="text" [(ngModel)]="niz" name="vnos"></ion-input>
+    </ion-item>
+    <button style="margin-top:2%; border-radius:5px; width:40%; height:40%; padding-top:5%; padding-bottom:5%;" ion-button type="submit" block>Išči</button>
+  </form>
+
+
+    <ion-list *ngIf='this.niz != ""'>
+      <ion-item-sliding *ngFor="let predmet of podatek">
+        <ion-item [routerLink]="['/posamezna', predmet.ID]">
+          <h5>{{predmet.Naslov}}</h5>
+        </ion-item>
+        <ion-item-options side="end">
+            <ion-item-option (click)="favorite(predmet.ID)" icon-only>
+              <ion-icon name="heart" style="font-size:30px;"></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="infinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

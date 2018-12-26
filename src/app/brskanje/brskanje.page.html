@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>BRSKANJE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="prvi">
+    <ion-item-sliding *ngFor="let predmet of podatek">
+      <span *ngFor="let predmet1 of predmet; let i = index" (click)="naslednja(predmet)">
+          <ion-item *ngIf="i%2!=0">
+            <h5>{{predmet1}}</h5>
+          </ion-item>
+      </span>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list *ngIf="drugi">
+    <ion-item-sliding *ngFor="let predmet of podatek">
+      <span *ngFor="let predmet1 of predmet; let i = index" (click)="naslednja2(predmet)">
+          <ion-item *ngIf="i%2!=0">
+            <h5>{{predmet1}}</h5>
+          </ion-item>
+      </span>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list *ngIf="tretji">
+    <ion-item-sliding *ngFor="let predmet of podatek">
+      <span *ngFor="let predmet1 of predmet; let i = index" (click)="naslednja3(predmet)">
+          <ion-item *ngIf="i%2!=0">
+            <h5>{{predmet1}}</h5>
+          </ion-item>
+      </span>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list *ngIf="cetrti">
+    <ion-item-sliding *ngFor="let predmet of podatek">
+      <ion-item [routerLink]="['/posamezna', predmet.ID]">
+        <h5>{{predmet.Naslov}}</h5>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-infinite-scroll *ngIf="cetrti" (ionInfinite)="infinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

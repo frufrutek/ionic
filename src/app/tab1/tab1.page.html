@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title style="color:white;">
+      DOMOV
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="spacer" style="height:3%;" id="domov-spacer2"></div>
+  <form id="domov-form2">
+    <img src="assets/logotip-UM.png" style="display:block;width:80%;height:auto;margin-left:auto;margin-right:auto;" />
+  </form>
+
+<h4 style="border-bottom: 1px soldi black; text-align:center;">ZADNJI VNOSI</h4>
+  <ion-list>
+    <ion-item-sliding *ngFor="let predmet of podatek">
+      <ion-item [routerLink]="['/posamezna', predmet.ID]">
+        <h5>{{predmet.Naslov}}</h5>
+      </ion-item>
+      <ion-item-options side="end">
+          <ion-item-option (click)="favorite(predmet.ID, predmet.Naslov)" icon-only>
+            <ion-icon name="heart" style="font-size:30px;"></ion-icon>
+          </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+</ion-content>

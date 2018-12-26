@@ -1,0 +1,60 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="pripravljeno">{{podatek.Naslov}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="pripravljeno" >
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+<ion-list>
+  <div style="font-weight:bold;">Naslov:</div>
+  <span style="margin-left:10%;">{{podatek.Naslov}}</span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Tuji naslov:</div>
+  <span style="margin-left:10%;">{{podatek.TujJezik_Naslov}}</span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Avtor:</div>
+  <span *ngFor="let avtorji of podatek.Osebe">
+    <span style="margin-left:10%;" *ngIf='avtorji.VlogaNaziv == "Avtor"'>{{avtorji.Ime + " " + avtorji.Priimek}}</span>
+  </span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Mentor:</div>
+  <span *ngFor="let mentorji of podatek.Osebe">
+    <span style="margin-left:10%;" *ngIf='mentorji.VlogaNaziv == "Mentor"'>{{mentorji.Ime + " " + mentorji.Priimek}}</span>
+  </span>
+
+  <span *ngFor="let komentorji of podatek.Osebe">
+    <div style="border-top:1px solid black; font-weight:bold;" *ngIf='komentorji.VlogaNaziv == "Komentor"'>Komentor:</div>
+  </span>
+
+  <span *ngFor="let komentorji of podatek.Osebe">
+    <span style="margin-left:10%;" *ngIf='komentorji.VlogaNaziv == "Komentor"'>{{komentorji.Ime + " " + komentorji.Priimek}}</span>
+  </span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Organizacija:</div>
+  <span style="margin-left:10%;">{{podatek.Organizacija.Naziv}}</span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Vrsta dela:</div>
+  <span style="margin-left:10%;">{{podatek.VrstaGradiva.Naziv}}</span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Leto izida:</div>
+  <span style="margin-left:10%;">{{podatek.LetoIzida}}</span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Ključne besede:</div>
+  <span *ngFor="let besede of podatek.KljucneBesede">
+    <span style="margin-left:10%;">{{besede}}</span><br>
+  </span>
+
+  <div style="border-top:1px solid black; font-weight:bold;">Opis:</div>
+  <span style="margin-left:10%;">{{podatek.Opis}}</span>
+
+<button style="margin-top:10%; font-size: 1.4em; padding:2%; margin-left:30%; width:40%; height:50%; " ion-button full (click)="odpriPDF()">PDF</button>
+
+</ion-list>
+</ion-content>
