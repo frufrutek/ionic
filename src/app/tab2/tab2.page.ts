@@ -13,6 +13,7 @@ export class Tab2Page { //takoj za tem lahko daš spremenljivke
   odstrani:boolean = true;
   odstrani1:boolean = true;
   public podatek:Array<Object>;
+  public podatek_shrani:Array<Object>;
 
   constructor(private podatki: ZahteveService, private shramba: Storage) {}
 
@@ -48,12 +49,11 @@ export class Tab2Page { //takoj za tem lahko daš spremenljivke
 }
 
   favorite(id){
+    this.podatek_shrani = [];
     this.podatki.dobiPoId(id).then(data =>{
-        this.podatek = JSON.parse(data.data);
+        this.podatek_shrani = JSON.parse(data.data);
       });
-    this.shramba.set(id, this.podatek);
-    this.shramba.get(id).then((val) => {
-      console.log(val);
-    });
+    console.log("ID: " + id + " Podatki: " + this.podatek_shrani);
+    this.shramba.set(id, this.podatek_shrani);
   }
   }
