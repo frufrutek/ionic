@@ -17,28 +17,21 @@ export class Tab3Page {
 
 ngOnInit(){
 this.shramba.forEach((id) => {
-    this.merged = {
-      ID: id,
-    }
-    this.items.push(this.merged);
+    this.items.push(id);
 })
       }
 
       doRefresh(refresher) {
-        this.shramba.forEach((id) => {
-            this.merged = {
-              ID: id.id,
-            }
-            this.items.push(this.merged);
-        })
-            setTimeout(() => {
+        this.items = [];
+        this.ngOnInit();
+        setTimeout(() => {
             refresher.target.complete();
           }, 2000);
     }
 
 
     delete(id){
-      console.log(id);
+      this.shramba.remove(id);
+      this.doRefresh(Event);
     }
-
-}
+  }
